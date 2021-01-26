@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body_block %}
+<h1>
+
+{% if not form.instance.pk %}
+Create Exam
+{% else %}
+Update Exam
+{% endif %}
+</h1>
+<form method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" class="btn btn-success" value="SUBMIT">
+
+</form>
+{% endblock %}
