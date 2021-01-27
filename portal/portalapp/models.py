@@ -18,7 +18,6 @@ class Enrollment(models.Model):
     student=models.ForeignKey('Student',related_name='enrolled',on_delete=models.CASCADE)
 class Exam(models.Model):
 
-    faculty=models.OneToOneField(User,on_delete=models.CASCADE)
     course=models.ManyToManyField('Course',related_name='exams')
     totalquestions=models.PositiveIntegerField()
     totalmarks=models.PositiveIntegerField()
