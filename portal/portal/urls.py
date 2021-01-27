@@ -19,5 +19,7 @@ from portalapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
-    path('portalapp/',include('portalapp.urls'))
+    path('portalapp/',include('portalapp.urls')),
+    path('logout/',views.user_logout,name='logout'),
+    path('signup/',views.signup,name='signup')
 ]
