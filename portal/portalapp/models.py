@@ -1,24 +1,31 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User,PermissionsMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
+class User(User,PermissionsMixin):
+
+    def __str__(self):
+        return self.username
+
 class Course(models.Model):
     name=models.CharField(max_length=50)
-
+    students=models.ManyToManyField('User',through='Enrollment')
     def __str__(self):
         return self.name
-class Student(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
-    courses=models.ManyToManyField('Course',related_name='students',through='Enrollment')
+    def get_absolute_url(self):
+        return reverse('course_detail',kwargs={'pk':self.pk})
+class Enrollment(models.Model):
+    course=models.ForeignKey('Course',related_name='enrolled_students',on_delete=models.CASCADE)
+    student=models.ForeignKey('User',related_name='enrolled_courses',on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.first_name + ' ' + self.user.last_name
-class Enrollment(models.Model):
-    course=models.ForeignKey('Course',related_name='enrolled',on_delete=models.CASCADE)
-    student=models.ForeignKey('Student',related_name='enrolled',on_delete=models.CASCADE)
-class Exam(models.Model):
+        return self.student.username
+    class Meta:
+        unique_together=('course','student')
 
-    course=models.ManyToManyField('Course',related_name='exams')
+class Exam(models.Model):
+    course=models.ForeignKey('Course',related_name='exams',on_delete=models.CASCADE)
     totalquestions=models.PositiveIntegerField()
     totalmarks=models.PositiveIntegerField()
     name=models.CharField(max_length=50)

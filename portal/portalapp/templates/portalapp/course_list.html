@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block body_block %}
+<div class="jumbotron">
+  <h1>List of Courses : </h1>
+  <ol>
+{% for course in courses %}
+<h2><li><a href="{{course.id}}" class="badge badge-light">{{course.name}}</a></li></h2>
+{% endfor %}
+</ol>
+
+</div>
+
+{% endblock %}

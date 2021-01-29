@@ -8,10 +8,10 @@ Create Exam
 Update Exam
 {% endif %}
 </h1>
-<form method="POST">
+<form method="POST" class="login-form">
   {% csrf_token %}
   {{form.as_p}}
-  <input type="submit" class="btn btn-success" value="SUBMIT">
+  <input type="submit" id="signup-submit" value="SUBMIT">
 
 </form>
 {% endblock %}
