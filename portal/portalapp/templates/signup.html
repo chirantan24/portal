@@ -1,16 +1,10 @@
 {% extends 'base.html' %}
 {% block body_block %}
 <div class="jumbotron">
-{% if registered %}
-<h1>You are Signed Up Successfully!! </h1>
-<h3> Click Here to <a href="{% url 'portalapp:login' %}">Login</a></h3> 
-{% else %}
 <form class="login-form" method="POST">
 {% csrf_token %}
-{{ user_form.as_p }}
-{{ student_form.as_p}}
+{{ form.as_p}}
 <input type="submit" id="login-submit" value="Sign UP">
 </form>
-{% endif %}
 </div>
 {% endblock %}
