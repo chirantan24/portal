@@ -4,37 +4,37 @@ from django.contrib.auth.models import User,PermissionsMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 class User(User,PermissionsMixin):
-
     def __str__(self):
         return self.username
-
-class Course(models.Model):
-    name=models.CharField(max_length=50)
-    students=models.ManyToManyField('User',through='Enrollment')
-    def __str__(self):
-        return self.name
-    def get_absolute_url(self):
-        return reverse('course_detail',kwargs={'pk':self.pk})
-class Enrollment(models.Model):
-    course=models.ForeignKey('Course',related_name='enrolled_students',on_delete=models.CASCADE)
-    student=models.ForeignKey('User',related_name='enrolled_courses',on_delete=models.CASCADE)
+status_choice=(
+('True','True'),
+('False','False'),
+)
+class Courses(models.Model):
+    title=models.CharField(max_length=256)
+    faculty=models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.student.username
-    class Meta:
-        unique_together=('course','student')
-
+        return self.title
+class studentCourses(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    courses=models.ForeignKey(Courses,on_delete=models.CASCADE)
+    status=models.CharField(choices=status_choice,default='False',max_length=20)
+    def __str__(self):
+        return self.user.username
 class Exam(models.Model):
-    course=models.ForeignKey('Course',related_name='exams',on_delete=models.CASCADE)
-    totalquestions=models.PositiveIntegerField()
-    totalmarks=models.PositiveIntegerField()
-    name=models.CharField(max_length=50)
-    duration=models.TimeField()
-    starttime=models.DateTimeField()
-    obtainedmarks=models.PositiveIntegerField()
-    def __str__(self):
-        return self.name
+    course=models.ForeignKey(Courses,on_delete=models.CASCADE)
+    title=models.CharField(default='exam',max_length=256)
+    total_marks=models.PositiveIntegerField()
+    start_time=models.DateTimeField(blank=True,null=True)
+    end_time=models.DateTimeField(blank=True,null=True)
 
+    def __str__(self):
+        return self.title
+status_choice=(
+('True','True'),
+('False','False'),
+)
 class Descriptive(models.Model):
 
     exam=models.ForeignKey('Exam',related_name='Descriptive',on_delete=models.CASCADE)

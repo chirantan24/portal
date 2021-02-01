@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<ol>
+  {% for i in catlist %}
+  <li>
+    <a href="/exam/{{i.id}}/">{{i.title}}</a>
+  </li>
+  {% endfor %}
+</ol>
+
+{% endblock %}

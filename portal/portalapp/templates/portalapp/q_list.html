@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block body %}
+{% if tf  %}
+<ol>
+  {% for i in tf %}
+  <li>
+    <p>{{i.question}}</p>
+  </li>
+
+  {% endfor %}
+
+</ol>
+
+{% else %}
+<h4>
+  <em>NO question yet</em>
+</h4>
+{% endif %}
+<br>
+
+{% if dis  %}
+
+<ol>
+  {% for i in dis %}
+  <li>
+    <p>{{i.question}}</p>
+  </li>
+
+  {% endfor %}
+
+</ol>
+
+{% else %}
+<p>No Discriptive</p>
+{% endif %}
+<br>
+{% if dis  %}
+
+<ol>
+  {% for i in fill %}
+  <li>
+    <p>{{i.question}}</p>
+  </li>
+
+  {% endfor %}
+
+</ol>
+
+{% else %}
+<p>No fillnblanks</p>
+{% endif %}
+<br><br>
+
+<h4>
+
+  <em>Add more question</em>
+</h4>
+<br>
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-6">
+    <a class="btn btn-outline-info btn-block" href="/tfq/{{pk}}/">True-False</a>
+  </div>
+  <div class="col-lg-4 col-md-4 col-6">
+    <a class="btn btn-outline-info btn-block" href="/dis/{{pk}}/">Discriptive</a>
+  </div>
+  <div class="col-lg-4 col-md-4 col-6">
+    <a class="btn btn-outline-info btn-block" href="/fill/{{pk}}/">Fill in the blanks</a>
+  </div>
+</div>
+
+{% endblock %}

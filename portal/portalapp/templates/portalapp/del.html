@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h3 style="text-align:center;">
+  <em>Are you sure ,you want to delete request?</em>
+</h3>
+<br><br>
+<form  method="post" class='login-form'>
+    {% csrf_token %}
+  <div class="row">
+    <div class="col-6">
+      <input type="submit" class="btn btn-danger btn-block"name="" value="Delete Request">
+
+    </div>
+    <div class="col-6">
+      <a class="btn btn-block btn-info" href="{% url 'home' %}">Cancel</a>
+    </div>
+  </div>
+
+
+</form>
+
+{% endblock %}
