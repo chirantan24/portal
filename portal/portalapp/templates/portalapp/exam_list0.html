@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block body %}
+{% if exam_list %}
+<ol>
+  {% for i in exam_list %}
+  <li>
+      <a href="/qlist/{{i.id}}/">{{i.title}}</a>
+  </li>
+  {% endfor %}
+
+</ol>
+
+{% else %}
+<h2>
+  <em>No Exams yet !</em>
+</h2>
+{% endif %}
+<br><br>
+
+<a href="/createexam/{{pk}}/" class="btn btn-info">Add Exams</a>
+{% endblock %}

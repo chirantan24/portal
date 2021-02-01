@@ -1,0 +1,15 @@
+{% extends 'eapp/base.html' %}
+
+{% block body %}
+<h2>
+  <em>Pending Requests</em>
+</h2>
+<ol>
+  {% for i in list %}
+  <li>
+    <a href="/det/{{i.id}}">{{i.user.username}}</a>
+  </li>
+  {% endfor %}
+</ol>
+
+{% endblock %}
